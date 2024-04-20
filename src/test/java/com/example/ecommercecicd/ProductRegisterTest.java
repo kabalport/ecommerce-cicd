@@ -16,10 +16,12 @@ class ProductRegisterTest {
     private ProductRegister productRegister;
     private ProductJpaRepository productJpaRepository;
 
+    private IProductRepository iProductRepository;
+
     @BeforeEach
     void setUp() {
         productJpaRepository = mock(ProductJpaRepository.class);
-        IProductRepository iProductRepository = new ProductRepositoryImpl(productJpaRepository);
+        iProductRepository = new ProductRepositoryImpl(productJpaRepository);
         productRegister = new ProductRegister(iProductRepository);
     }
 
