@@ -21,7 +21,6 @@ class ProductRegisterServiceTest {
     void setUp() {
         productJpaRepository = mock(ProductJpaRepository.class);
         iProductRepository = new ProductRepositoryImpl(productJpaRepository);
-//        iProductRepository = mock(IProductRepository.class);
         sut = new ProductRegisterService(iProductRepository);
     }
 
