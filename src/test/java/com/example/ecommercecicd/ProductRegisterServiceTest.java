@@ -12,17 +12,16 @@ import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 
-class ProductRegisterTest {
-    private ProductRegister productRegister;
+class ProductRegisterServiceTest {
+    private ProductRegisterService productRegisterService;
     private ProductJpaRepository productJpaRepository;
-
     private IProductRepository iProductRepository;
 
     @BeforeEach
     void setUp() {
         productJpaRepository = mock(ProductJpaRepository.class);
         iProductRepository = new ProductRepositoryImpl(productJpaRepository);
-        productRegister = new ProductRegister(iProductRepository);
+        productRegisterService = new ProductRegisterService(iProductRepository);
     }
 
     @Test
@@ -32,7 +31,7 @@ class ProductRegisterTest {
         AddProductRequest addProductRequest = ProductFixture.getAddProductRequest();
 
         // when
-        productRegister.addProduct(addProductRequest);
+        productRegisterService.addProduct(addProductRequest);
 
         // then
         ArgumentCaptor<Product> captor = ArgumentCaptor.forClass(Product.class);
@@ -42,7 +41,7 @@ class ProductRegisterTest {
         Assertions.assertEquals(addProductRequest.price(),expectedProduct.getPrice());
     }
 
-    public static class Product {
+    public class Product {
         private Long id;
         private final String name;
         private final int price;
@@ -74,10 +73,10 @@ class ProductRegisterTest {
 
         void save(Product product);
     }
-    public static class ProductRegister {
+    public class ProductRegisterService {
         private final IProductRepository iProductRepository;
 
-        public ProductRegister(IProductRepository iProductRepository) {
+        public ProductRegisterService(IProductRepository iProductRepository) {
             this.iProductRepository = iProductRepository;
         }
 
@@ -87,7 +86,7 @@ class ProductRegisterTest {
         }
     }
 
-public static class ProductRepositoryImpl implements IProductRepository {
+public class ProductRepositoryImpl implements IProductRepository {
         private final ProductJpaRepository productJpaRepository;
 
     public ProductRepositoryImpl(ProductJpaRepository productJpaRepository) {
@@ -98,7 +97,7 @@ public static class ProductRepositoryImpl implements IProductRepository {
             productJpaRepository.save(product);
         }
     }
-    private static class ProductJpaRepository {
+    private class ProductJpaRepository {
         private Long sequence = 0L;
         private Map<Long, Product> persistence = new HashMap<>();
 
