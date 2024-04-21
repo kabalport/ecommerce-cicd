@@ -29,7 +29,9 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.google.guava:guava:31.1-jre'
-
+	testImplementation 'io.rest-assured:rest-assured:5.1.1'
+	//guava
+	implementation group: 'com.google.guava', name: 'guava', version: '32.1.1-jre'
 	//rest-doc
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	//swagger
