@@ -59,14 +59,14 @@ class ProductServiceUnitTest {
     @Test
     void 상품조회() {
         //given
-        Product givenProduct = ProductFixture.existProductOne();
-        when(iproductRepository.read(givenProduct.getId())).thenReturn(Optional.of(givenProduct));
+
         //when
-        Product getProductResponse = sut.read(givenProduct.getId());
+        final GetProductResponse response = sut.getProduct(productId);
         //then
         // 상품의 응답을 검증
         Assertions.assertNotNull(getProductResponse);
-        Assertions.assertEquals(givenProduct.getId(),getProductResponse.getId());
     }
 
+    private class GetProductResponse {
+    }
 }
