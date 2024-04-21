@@ -1,3 +1,9 @@
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.11'
@@ -18,12 +24,48 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.google.guava:guava:31.1-jre'
+	testImplementation 'io.rest-assured:rest-assured:5.1.1'
+	//guava
+	implementation group: 'com.google.guava', name: 'guava', version: '32.1.1-jre'
+	//rest-doc
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	//swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+	//test
+	testImplementation "org.mockito:mockito-core:3.+"
+	//devtool
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//model mapper
+	implementation 'org.modelmapper:modelmapper:3.1.1'
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'io.rest-assured:rest-assured:5.3.2'
+	// 정적코드테스트
+	testImplementation 'com.tngtech.archunit:archunit:1.1.0'
+	implementation group: 'com.approvaltests', name: 'approvaltests', version: '23.0.0'
 }
+
 
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'
 }
 
 tasks.named('test') {
+	// Define snippetsDir as a directory within the build directory
+	def snippetsDir = file("$buildDir/generated-snippets")
+
+	outputs.dir snippetsDir
 	useJUnitPlatform()
+
+	doFirst {
+		// Ensure the directory exists before the tests run
+		snippetsDir.mkdirs()
+	}
 }
