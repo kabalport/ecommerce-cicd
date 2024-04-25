@@ -29,4 +29,16 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setId(Long productId) {
+        this.id = productId;
+    }
 }

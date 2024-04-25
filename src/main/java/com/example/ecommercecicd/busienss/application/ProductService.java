@@ -20,14 +20,20 @@ public class ProductService {
      * 상품추가
      * @param addProductInfo
      */
-    public void addProduct(Product addProductInfo) {
+    public Product addProduct(Product addProductInfo) {
         // 요청한 값을 유효성 검사합니다.
         ProductValidate.validate(addProductInfo);
+
         // 추가할 상품을 만듭니다.
         Product product = new Product(addProductInfo.getName(), addProductInfo.getPrice());
+
         // 추가할 상품을 데이터베이스에 저장합니다.
-        iproductRepository.save(product);
+        Product savedProduct = iproductRepository.save(product);
+
+        // 저장된 상품을 반환합니다.
+        return savedProduct;
     }
+
 
     /**
      * 상품읽기
@@ -42,4 +48,25 @@ public class ProductService {
         return result;
     }
 
+
+    public Product updateProduct(Long productId, Product updatedProductInfo) {
+        Product existingProduct = iproductRepository.read(productId)
+                .orElseThrow(() -> new ProductException("해당 ID의 상품을 찾을 수 없습니다: " + productId));
+
+        existingProduct.setName(updatedProductInfo.getName());
+        existingProduct.setPrice(updatedProductInfo.getPrice());
+
+        ProductValidate.validate(existingProduct);
+
+        iproductRepository.save(existingProduct);
+
+        // Step 5: Return the updated product
+        return existingProduct;
+    }
+
+    public void deleteProduct(Long productId) {
+        Product product = iproductRepository.read(productId)
+                .orElseThrow(() -> new ProductException("해당 ID의 상품을 찾을 수 없습니다: " + productId));
+        iproductRepository.delete(productId);
+    }
 }

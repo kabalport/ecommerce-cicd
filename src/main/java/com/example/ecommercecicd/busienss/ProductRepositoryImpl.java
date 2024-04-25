@@ -17,14 +17,19 @@ public class ProductRepositoryImpl implements IProductRepository {
         this.productJpaRepository = productJpaRepository;
     }
     @Override
-    public void save(Product product) {
-        productJpaRepository.save(product);
+    public Product save(Product product) {
+        return productJpaRepository.save(product);
     }
 
     @Override
     public Optional<Product> read(Long id) {
         Optional<Product> product = productJpaRepository.findById(id);
         return product;
+    }
+
+    @Override
+    public void delete(Long productId) {
+        productJpaRepository.deleteById(productId);
     }
 
 }
