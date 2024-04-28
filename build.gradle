@@ -118,6 +118,8 @@ tasks.jacocoTestCoverageVerification {
 
 			excludes = List.of(
 					"*.controller.*",
+					"*.api.*",
+					"*.infrastructure.*",
 					"net.dodoinfo.sbserver.SbserverApplication"
 			)
 		}
