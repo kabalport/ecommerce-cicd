@@ -26,6 +26,7 @@ public class UserPointService {
         validator.validate(chargePoint);
         Member member = memberRepository.findByUserId(userId).orElseThrow(() -> new UserPointBadRequestException(USER_NOT_FOUND));
         member.chargeUserPoint(chargePoint);
+        pointTransactionRepository.save(PointTransaction.createByCharge(member, chargePoint));
     }
 
 

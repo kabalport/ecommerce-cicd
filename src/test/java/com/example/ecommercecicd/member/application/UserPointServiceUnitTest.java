@@ -27,6 +27,7 @@ class UserPointServiceUnitTest {
     void setUp() {
         // 객체초기화
         memberRepository = Mockito.mock(MemberRepository.class);
+        pointTransactionRepository = Mockito.mock(PointTransactionRepository.class);
         userPointService = new UserPointService(memberRepository, pointTransactionRepository);
     }
 
