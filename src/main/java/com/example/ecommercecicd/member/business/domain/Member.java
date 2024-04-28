@@ -17,12 +17,12 @@ import static com.example.ecommercecicd.member.business.exception.UserPointError
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long memberId;
     private String userId;
     private BigDecimal userPoint;
 
-    public Member(long id, String userId, BigDecimal userPoint) {
-        this.id = id;
+    public Member(long memberId, String userId, BigDecimal userPoint) {
+        this.memberId = memberId;
         this.userId = userId;
         this.userPoint = userPoint;
     }
@@ -33,8 +33,8 @@ public class Member {
         this.userPoint = userPoint;
     }
 
-    public long getId() {
-        return id;
+    public long getMemberId() {
+        return memberId;
     }
 
     public String getUserId() {
@@ -52,7 +52,7 @@ public class Member {
     }
 
     public void assignId(Long id) {
-        this.id = id;
+        this.memberId = id;
     }
 
     public void setUserPoint(BigDecimal userPoint) {

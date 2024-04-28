@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface MemberJpaRepository extends JpaRepository<Member,Long> {
-    @Query("SELECT m FROM Member m WHERE m.id = ?1")
+    @Query("SELECT m FROM Member m WHERE m.memberId = ?1")
     Optional<Member> findById(Long id);
     @Query("SELECT m FROM Member m WHERE m.userId = ?1")
     Optional<Member> findByUserId(String userId);

@@ -1,9 +1,7 @@
 package com.example.ecommercecicd.member.application;
 
-import com.example.ecommercecicd.member.application.UserPointService;
 import com.example.ecommercecicd.member.business.domain.Member;
 import com.example.ecommercecicd.member.business.repository.MemberRepository;
-import com.example.ecommercecicd.member.api.UserPointRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +31,7 @@ class UserPointServiceTest {
         // when
         userPointService.charge(member.getUserId(), chargeAmount);
         // then
-        Member chargedMember = memberRepository.findById(member.getId()).get();
+        Member chargedMember = memberRepository.findById(member.getMemberId()).get();
         Assertions.assertEquals(chargeAmount, chargedMember.getUserPoint());
     }
 }

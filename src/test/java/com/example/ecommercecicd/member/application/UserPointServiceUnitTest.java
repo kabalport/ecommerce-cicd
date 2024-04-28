@@ -7,6 +7,7 @@ import com.example.ecommercecicd.member.business.exception.UserPointError;
 import com.example.ecommercecicd.member.business.repository.MemberRepository;
 import com.example.ecommercecicd.member.api.UserPointRequest;
 
+import com.example.ecommercecicd.member.business.repository.PointTransactionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,12 +21,13 @@ class UserPointServiceUnitTest {
     private UserPointService userPointService;
     private MemberRepository memberRepository;
 
+    private PointTransactionRepository pointTransactionRepository;
 
     @BeforeEach
     void setUp() {
         // 객체초기화
         memberRepository = Mockito.mock(MemberRepository.class);
-        userPointService = new UserPointService(memberRepository);
+        userPointService = new UserPointService(memberRepository, pointTransactionRepository);
     }
 
     @Test
@@ -62,7 +64,7 @@ class UserPointServiceUnitTest {
         // given
         Member member = MemberFixture.initMember();
         UserPointRequest request = MemberFixture.chargeRequest();
-        Mockito.when(memberRepository.findById(member.getId())).thenReturn(Optional.of(member));
+        Mockito.when(memberRepository.findByUserId(member.getUserId())).thenReturn(Optional.of(member));
         // when
         userPointService.charge(request.getUserId(),request.getAddPoint());
         // then
