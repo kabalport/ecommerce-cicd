@@ -44,9 +44,18 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:3.1.1'
 
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'io.rest-assured:rest-assured:5.3.2'
+
+	// 데이터베이스
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	//테스크컨테이너
+	testImplementation "org.testcontainers:testcontainers:1.19.7"
+	testImplementation "org.testcontainers:postgresql:1.19.7"
+	testImplementation "org.testcontainers:junit-jupiter:1.19.7"
+
 	// 정적코드테스트
 	testImplementation 'com.tngtech.archunit:archunit:1.1.0'
 	implementation group: 'com.approvaltests', name: 'approvaltests', version: '23.0.0'

@@ -1,5 +1,6 @@
 package com.example.ecommercecicd.member.application;
 
+import com.example.ecommercecicd.IntegrationTest;
 import com.example.ecommercecicd.member.business.domain.Member;
 import com.example.ecommercecicd.member.business.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 
 @SpringBootTest
 @Transactional
-class UserPointServiceTest {
+class UserPointServiceTest extends IntegrationTest {
     @Autowired
     private UserPointService userPointService;
 

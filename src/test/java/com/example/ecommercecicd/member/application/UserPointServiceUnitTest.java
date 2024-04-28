@@ -20,8 +20,9 @@ import java.util.Optional;
 class UserPointServiceUnitTest {
     private UserPointService userPointService;
     private MemberRepository memberRepository;
-
     private PointTransactionRepository pointTransactionRepository;
+
+
 
     @BeforeEach
     void setUp() {
